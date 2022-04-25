@@ -23,7 +23,7 @@ const Info = styled.div`
   justify-content: center;
 `;
 const Title = styled.div`
-  color: black;
+  color: white;
   text-shadow: -1px -1px 0 #b12828, 0 -1px 0 #b12828, 1px -1px 0 #b12828,
     1px 0 0 #b12828, 1px 1px 0 #b12828, 0 1px 0 #b12828, -1px 1px 0 #b12828,
     -1px 0 0 #b12828;
