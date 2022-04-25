@@ -1,4 +1,8 @@
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import {
+  FitnessCenter,
+  Search,
+  ShoppingCartOutlined
+} from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import Badge from "@material-ui/core/Badge";
@@ -72,7 +76,10 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>SupleKoksa</Logo>
+          <Logo>
+            SupleKoksa
+            <FitnessCenter />
+          </Logo>
         </Center>
         <Right>
           <Menu>REJESTRACJA</Menu>

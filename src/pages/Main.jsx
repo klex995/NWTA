@@ -1,5 +1,6 @@
 import React from "react";
 import Categories from "../components/Categories";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import News from "../components/News";
 import Newsletter from "../components/Newsletter";
@@ -15,6 +16,7 @@ const Main = () => {
       <Categories />
       <Products />
       <Newsletter />
+      <Footer />
     </div>
   );
 };
