@@ -9,11 +9,11 @@ const verifyToken = (req,res,next) => {
             if(err) res.status(403).json("Token is not valid!");
             req.user = user;
             next()
-        })
+        });
     }else{
         return res.status(401).json("You are not authenticated");
     }
-}
+};
 
 const verifyTokenAndAuthorization = (req,res,next) => {
     verifyToken(req,res, () => {
@@ -22,7 +22,17 @@ const verifyTokenAndAuthorization = (req,res,next) => {
         }else{
             res.statur(403).json("You are not allowed to do that!")
         }
-    })
-}
+    });
+};
 
-module.exports = {verifyToken, verifyTokenAndAuthorization}
+const verifyTokenAndAdmin = (req,res,next) => {
+    verifyToken(req,res, () => {
+        if(req.user.isAdmin){
+            next()
+        }else{
+            res.statur(403).json("You are not allowed to do that!")
+        }
+    });
+};
+
+module.exports = {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin }
