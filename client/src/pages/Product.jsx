@@ -7,6 +7,8 @@ import Newsletter from "../components/Newsletter";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux"; 
 
 const Container = styled.div``;
 
@@ -84,6 +86,7 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -101,6 +104,11 @@ const Product = () => {
     } else {
       setQuantity(quantity + 1);
     }
+  };
+
+  const handleClick = () => {
+    dispatch(
+      addProduct({ ...product, quantity }));
   };
 
   return (
@@ -121,7 +129,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button>DODAJ DO KOSZYKA</Button>
+            <Button onClick={handleClick}>DODAJ DO KOSZYKA</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
