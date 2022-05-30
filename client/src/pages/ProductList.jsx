@@ -45,9 +45,9 @@ const ProductList = () => {
             <Option disabled selected>
               Typ
             </Option>
-            <Option>Monohydrant</Option>
-            <Option>Jabłczan</Option>
-            <Option>Cytrynian</Option>
+            <Option>Proszek</Option>
+            <Option>Kapsułki</Option>
+            <Option>Napoje</Option>
           </Select>
         </Filter>
         <Filter>
