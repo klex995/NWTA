@@ -1,8 +1,11 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import News from "../components/News";
+
+
 
 const Container = styled.div``;
 
@@ -139,6 +142,8 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Container>
       <Navbar />
@@ -155,55 +160,34 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
+           {cart.products.map((product) => (
+           <Product>
               <ProductDetail>
-                <Image src="https://image.ceneostatic.pl/data/article_picture/eb/c5/8f9d-0e59-4768-b26d-784c91984f6a_large.png" />
+                <Image src={product.img} />
                 <Details>
                   <ProductName>
-                    <b>Produkt:</b> Kreatyna
+                    <b>Produkt:</b> {product.title}
                   </ProductName>
                   <ProductId>
-                    <b>ID:</b> 111
+                    <b>ID:</b> {product._id}
                   </ProductId>
                   <ProductType>
-                    <b>Typ:</b> Monohydrant
+                    <b>Typ:</b> {product.type}
                   </ProductType>
                 </Details>
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
                   <Add />
-                  <ProductAmount>1</ProductAmount>
+                  <ProductAmount> {product.quantity} </ProductAmount>
                   <Remove />
                 </ProductAmountContainer>
-                <ProductPrice>30 PLN</ProductPrice>
+                <ProductPrice>PLN {product.price * product.quantity} </ProductPrice>
               </PriceDetail>
             </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://strefamocy.pl/18103-thickbox_default/optimum-creatine-2500-200-kaps.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Produkt:</b> Kreatyna
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 112
-                  </ProductId>
-                  <ProductType>
-                    <b>Typ:</b> Monohydrant
-                  </ProductType>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>40 PLN</ProductPrice>
-              </PriceDetail>
-            </Product>
+
           </Info>
           <Summary>
             <SummaryTitle>PODSUMOWANIE ZAMÓWIENIA</SummaryTitle>
