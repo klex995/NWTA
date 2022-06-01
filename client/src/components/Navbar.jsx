@@ -86,8 +86,12 @@ const Navbar = () => {
           </Logo>
         </Center>
         <Right>
-          <Menu>REJESTRACJA</Menu>
-          <Menu>LOGOWANIE</Menu>
+          <Link to="/rejestracja">
+            <Menu>Zarejestruj się</Menu>
+          </Link>
+          <Link to="/logowanie">
+            <Menu>Zaloguj się</Menu>
+          </Link>
           <Link to="/koszyk">
           <Menu>
             <Badge badgeContent={quantity} color="primary">

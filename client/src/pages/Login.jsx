@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { login } from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;
@@ -47,6 +50,10 @@ const Button = styled.button`
   cursor: pointer;
   margin-bottom: 10px;
   margin-top: 10px;
+  &:disabled{
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 const Link = styled.a`
@@ -56,15 +63,38 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
+
   return (
     <Container>
       <Wrapper>
         <Title>ZALOGUJ SIĘ</Title>
         <Form>
-          <Input placeholder="login" />
-          <Input placeholder="hasło" />
-          <Button>ZALOGUJ</Button>
+          <Input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick = {handleClick} disabled={isFetching}>ZALOGUJ</Button>
+          {error && <Error>Coś poszło nie tak.</Error>}
           <Link>ZAPOMNIAŁEŚ HASŁO?</Link>
           <Link>STWÓRZ NOWE KONTO</Link>
         </Form>

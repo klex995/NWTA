@@ -4,8 +4,13 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import News from "../components/News";
+import StripeCheckout from "react-stripe-checkout";
+import { useEffect, useState } from "react";
+import { userRequest } from "../requestMethods";
+import { useHistory } from "react-router";
 
 
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -142,7 +147,29 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  
   const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const history = useHistory();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  }
+  
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        history.push("/success", {
+          stripeData: res.data,
+          products: cart, });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart.total, history]);
 
   return (
     <Container>
@@ -193,7 +220,7 @@ const Cart = () => {
             <SummaryTitle>PODSUMOWANIE ZAMÓWIENIA</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Rachunek</SummaryItemText>
-              <SummaryItemPrice>70 PLN</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} PLN</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Dostawa</SummaryItemText>
@@ -205,9 +232,20 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Do zapłaty</SummaryItemText>
-              <SummaryItemPrice>70 PLN</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} PLN</SummaryItemPrice>
             </SummaryItem>
-            <Button>DOKOŃCZ ZAMÓWIENIE</Button>
+            <StripeCheckout
+              name="SupleKoksa"
+              image="https://fv9-5.failiem.lv/thumb_show.php?i=t5x2xub5y&view"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey='pk_test_51L5UxFFtDqSpPnjDbHJmyqFqAzDzVp33hqwRTzuJ7OqMyMTDyG1hC8PRNAlUcYjucHbtDgNXd4C6qjmSkioBaEli001pdvfuQT'
+            >
+              <Button>Zapłać teraz</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
