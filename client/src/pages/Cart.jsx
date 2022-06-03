@@ -180,7 +180,7 @@ const Cart = () => {
         <Top>
           <TopButton>KONTYNUUJ ZAKUPY</TopButton>
           <TopTexts>
-            <TopText>Koszyk(2)</TopText>
+            <TopText>Koszyk({cart.quantity})</TopText>
             <TopText>Lista życzeń (0)</TopText>
           </TopTexts>
           <TopButton type="filled">DOKOŃCZ ZAMÓWIENIE</TopButton>

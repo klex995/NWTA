@@ -23,7 +23,7 @@ const appReducer = combineReducers({user: userReducer, cart: cartReducer});
 
 
 
-const rootReducer = (state, action) => {
+const rootReducer = (state, action) => { 
     if (action.type === 'USER_LOGOUT') {
         return appReducer(undefined, action)
     }

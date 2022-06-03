@@ -92,6 +92,7 @@ const Navbar = () => {
           <Link to="/logowanie">
             <Menu>Zaloguj się</Menu>
           </Link>
+          <Menu>Wyloguj się</Menu>
           <Link to="/koszyk">
           <Menu>
             <Badge badgeContent={quantity} color="primary">

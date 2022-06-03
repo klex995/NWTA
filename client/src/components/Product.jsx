@@ -3,8 +3,13 @@ import {
   SearchOutlined,
   ShoppingCartOutlined
 } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { addProduct } from "../redux/cartRedux";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
+import { useLocation } from "react-router-dom";
 
 const Info = styled.div`
   width: 100%;
@@ -67,14 +72,17 @@ const Icon = styled.div`
   }
 `;
 
+
+
 const Product = ({ item }) => {
+
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined/>
         </Icon>
         <Icon>
           <Link to={`/produkt/${item._id}`}>
