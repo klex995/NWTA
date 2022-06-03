@@ -8,6 +8,9 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { addProduct, removeProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux"; 
 
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -38,14 +41,6 @@ const TopButton = styled.button`
   background-color: ${(props) =>
     props.type === "filled" ? "black" : "transparent"};
   color: ${(props) => props.type === "filled" && "white"};
-`;
-
-const TopTexts = styled.div``;
-
-const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 10px;
 `;
 
 const Bottom = styled.div`
@@ -123,7 +118,7 @@ const Summary = styled.div`
 `;
 
 const SummaryTitle = styled.h1`
-  font-weight: 200;
+  font-weight: 700;
 `;
 
 const SummaryItem = styled.div`
@@ -144,6 +139,7 @@ const Button = styled.button`
   background-color: black;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 const Cart = () => {
@@ -151,6 +147,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
+  const quantity = 1;
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -171,6 +169,11 @@ const Cart = () => {
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
 
+  const handleAdd = (product) => {
+    dispatch(
+      addProduct({...product, quantity }));
+  };
+
   return (
     <Container>
       <Navbar />
@@ -178,12 +181,9 @@ const Cart = () => {
       <Wrapper>
         <Title>TWÓJ KOSZYK</Title>
         <Top>
-          <TopButton>KONTYNUUJ ZAKUPY</TopButton>
-          <TopTexts>
-            <TopText>Koszyk({cart.quantity})</TopText>
-            <TopText>Lista życzeń (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">DOKOŃCZ ZAMÓWIENIE</TopButton>
+          <Link to="/">
+            <TopButton>KONTYNUUJ ZAKUPY</TopButton>
+          </Link>
         </Top>
         <Bottom>
           <Info>
@@ -205,9 +205,8 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <Add onClick={()=>{handleAdd(product)}} style={{cursor: "pointer"}} />
                   <ProductAmount> {product.quantity} </ProductAmount>
-                  <Remove />
                 </ProductAmountContainer>
                 <ProductPrice>PLN {product.price * product.quantity} </ProductPrice>
               </PriceDetail>

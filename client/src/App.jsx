@@ -22,22 +22,22 @@ const App = () => {
         <Route exact path="/">
           <Main />
         </Route>
-        <Route path="/produkty/:category">
+        <Route path="/products/:category">
           <ProductList />
         </Route>
-        <Route path="/produkt/:id">
+        <Route path="/product/:id">
           <Product />
         </Route>
-        <Route path="/koszyk">
+        <Route path="/cart">
           <Cart />
         </Route>
         <Route path="/success">
           <Success />
         </Route>
-        <Route path="/logowanie">
+        <Route path="/login">
           {user ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route path="/rejestracja">
+        <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
       </Switch>

@@ -85,6 +85,9 @@ const Menu = styled.div`
   font-size: 16px;
   cursor: pointer;
   margin-left: 10px;
+  &:hover{
+    color: #777;
+  }
 `;
 
 const Navbar = () => { 
@@ -114,10 +117,10 @@ const Navbar = () => {
           </Logo>
         </Center>
         <Right>
-          <Link to="/rejestracja">
+          <Link to="/register">
             <Menu>Zarejestruj się</Menu>
           </Link>
-          <Link to="/logowanie">
+          <Link to="/login">
             <Menu>Zaloguj się</Menu>
           </Link>
           <Button onClick={() => {handleClick(dispatch)}}>
@@ -125,7 +128,7 @@ const Navbar = () => {
               Wyloguj się
             </Menu>
           </Button>
-          <Link to="/koszyk">
+          <Link to="/cart">
           <Menu>
             <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlined />

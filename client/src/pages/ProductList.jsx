@@ -6,6 +6,7 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { categories } from "../data";
 
 const Container = styled.div``;
 
@@ -40,19 +41,15 @@ const ProductList = () => {
   const [filter, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
 
-  const handleFilters = (e) => {
-    const value = e.target.value;
-    setFilters({
-      ...filter,
-      [e.target.name]: value
-    });
-  };
-  console.log(filter);
+  function findCat(categories){
+    return categories.cat === cat
+  }
+
   return (
     <Container>
       <Navbar />
       <News />
-      <Title>{cat}</Title>
+      <Title>{categories.find(findCat).title}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Sortuj produkty:</FilterText>

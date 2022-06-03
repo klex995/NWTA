@@ -8,6 +8,7 @@ import {
   Twitter
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -43,6 +44,7 @@ const SocialIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2px;
+  cursor: pointer;
 `;
 
 const Center = styled.div`
@@ -63,8 +65,16 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  color: yellow; 
   width: 50%;
   margin-bottom: 5px;
+`;
+
+const LinkItem = styled.i`
+font-style: normal;
+  &:hover{
+    color: #777;
+  }
 `;
 
 const Right = styled.div`
@@ -97,27 +107,24 @@ const Footer = () => {
         </Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
-            <Facebook />
+            <Link to={{ pathname: "https://facebook.com" }} target="_blank"><Facebook /></Link>
           </SocialIcon>
           <SocialIcon color="E4405F">
-            <Instagram />
+            <Link to={{ pathname: "https://instagram.com" }} target="_blank"><Instagram /></Link>
           </SocialIcon>
           <SocialIcon color="55ACEE">
-            <Twitter />
+            <Link to={{ pathname: "https://twitter.com" }} target="_blank"><Twitter /></Link>
           </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
         <Title>Przydatne linki</Title>
         <List>
-          <ListItem>Strona główna</ListItem>
-          <ListItem>Koszyk</ListItem>
-          <ListItem>Proszki</ListItem>
-          <ListItem>Kapsułki</ListItem>
-          <ListItem>Napoje</ListItem>
-          <ListItem>Śledzenie zamówienia</ListItem>
-          <ListItem>Lista życzeń</ListItem>
-          <ListItem>Zasady</ListItem>
+          <ListItem><Link to="/"><LinkItem>Strona główna</LinkItem></Link></ListItem>
+          <ListItem><Link to="/cart"><LinkItem>Koszyk</LinkItem></Link></ListItem>
+          <ListItem><Link to="/products/powder"><LinkItem>Proszki</LinkItem></Link></ListItem>
+          <ListItem><Link to="/products/capsules"><LinkItem>Kapsułki</LinkItem></Link></ListItem>
+          <ListItem><Link to="/products/drinks"><LinkItem>Napoje</LinkItem></Link></ListItem>
         </List>
       </Center>
       <Right>

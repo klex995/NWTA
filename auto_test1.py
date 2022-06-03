@@ -31,7 +31,7 @@ class AppSearch(unittest.TestCase):
 
     def test_logowanie(self):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
-        driver.get("http://localhost:3000/logowanie")
+        driver.get("http://localhost:3000/login")
 
         search_login = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[1]""")
         search_pw = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[2]""")
@@ -46,7 +46,7 @@ class AppSearch(unittest.TestCase):
 
     def test_rejestracja(self):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
-        driver.get("http://localhost:3000/rejestracja")
+        driver.get("http://localhost:3000/register")
 
         search_imie = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[1]""")
         search_nazwisko = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[2]""")
@@ -70,12 +70,12 @@ class AppSearch(unittest.TestCase):
 
     def test_dodaj_koszyk(self):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
-        driver.get("http://localhost:3000/produkt/6294e6720296fcda6322d652")
+        driver.get("http://localhost:3000/product/6294e6720296fcda6322d652")
 
         search_add = driver.find_element(by=By.XPATH, value="""// *[ @ id = "root"] / div / div[3] / div[2] / div / button""")
         search_add.click()
 
-        driver.get("http://localhost:3000/koszyk")
+        driver.get("http://localhost:3000/cart")
 
         search_qcart = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[1]/div/div[3]/a[3]/div/span/span""")
 
@@ -87,7 +87,7 @@ class AppSearch(unittest.TestCase):
 
     def test_payment(self):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
-        driver.get("http://localhost:3000/koszyk")
+        driver.get("http://localhost:3000/cart")
 
         search_paybtn = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[3]/div[2]/div[2]/span/button""")
         search_paybtn.click()

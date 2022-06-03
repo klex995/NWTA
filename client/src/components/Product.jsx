@@ -6,10 +6,10 @@ import {
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { addProduct } from "../redux/cartRedux";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
+import { addProduct } from "../redux/cartRedux";
 
 const Info = styled.div`
   width: 100%;
@@ -69,12 +69,34 @@ const Icon = styled.div`
   &:hover {
     background-color: #e9e6e6;
     transform: scale(1.1);
+    cursor: pointer;
   }
 `;
 
 
 
 const Product = ({ item }) => {
+  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+  const quantity = 1
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + item._id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  });
+
+
+  const handleClick = () => {
+    console.log(item._id)
+    console.log(product)
+    dispatch(
+      addProduct({ ...product, quantity }));
+  }
 
   return (
     <Container>
@@ -82,15 +104,12 @@ const Product = ({ item }) => {
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined/>
+          <ShoppingCartOutlined onClick={handleClick} />
         </Icon>
         <Icon>
-          <Link to={`/produkt/${item._id}`}>
+          <Link to={`/product/${item._id}`}>
             <SearchOutlined />
           </Link>
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
         </Icon>
       </Info>
     </Container>
