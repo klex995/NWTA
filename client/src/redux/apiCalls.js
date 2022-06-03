@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logOut } from "./userRedux";
 import { publicRequest } from "../requestMethods";
 
 
@@ -7,6 +7,7 @@ import { publicRequest } from "../requestMethods";
  * @param dispatch - The dispatch function from Redux.
  * @param user - {
  */
+
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
@@ -16,3 +17,8 @@ export const login = async (dispatch, user) => {
         dispatch(loginFailure())
     }
 } 
+
+export const logout = async(dispatch) => {
+    dispatch(logOut());
+    alert("Wylogowano!");
+}

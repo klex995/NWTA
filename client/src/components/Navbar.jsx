@@ -6,12 +6,21 @@ import {
 import React from "react";
 import styled from "styled-components";
 import Badge from "@material-ui/core/Badge";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import { logout } from "../redux/apiCalls"
 
+const GlobalStyle = createGlobalStyle`
+  *{
+    color: black;
+    text-decoration: none;
+  }
+`
 
 const Container = styled.div`
   height: 60px;
+  background: white;
 `;
 
 const Wrapper = styled.div`
@@ -19,6 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 `;
 
 const Left = styled.div`
@@ -40,6 +50,14 @@ const SearchContainer = styled.div`
   padding: 5px;
 `;
 
+const Button = styled.button`
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: arial, sans-serif;
+  cursor: pointer;
+`
+
 const Input = styled.input`
   border: none;
 `;
@@ -52,6 +70,8 @@ const Center = styled.div`
 const Logo = styled.div`
   font-size: 38px;
   font-weight: bold;
+  color: black;
+  text-decoration: none;
 `;
 
 const Right = styled.div`
@@ -68,9 +88,15 @@ const Menu = styled.div`
 `;
 
 const Navbar = () => { 
+  const dispatch = useDispatch()
+  const handleClick = (e) => {
+    logout(dispatch);
+  };
+
   const quantity = useSelector(state => state.cart.quantity);
   return (
     <Container>
+      <GlobalStyle />
       <Wrapper>
         <Left>
           <Language>PL</Language>
@@ -81,7 +107,9 @@ const Navbar = () => {
         </Left>
         <Center>
           <Logo>
-            SupleKoksa
+            <Link to="/">
+                SupleKoksa
+            </Link>
             <FitnessCenter />
           </Logo>
         </Center>
@@ -92,7 +120,11 @@ const Navbar = () => {
           <Link to="/logowanie">
             <Menu>Zaloguj się</Menu>
           </Link>
-          <Menu>Wyloguj się</Menu>
+          <Button onClick={() => {handleClick(dispatch)}}>
+            <Menu>
+              Wyloguj się
+            </Menu>
+          </Button>
           <Link to="/koszyk">
           <Menu>
             <Badge badgeContent={quantity} color="primary">

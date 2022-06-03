@@ -55,17 +55,6 @@ const ProductList = () => {
       <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
-          <FilterText>Filtruj produkty:</FilterText>
-          <Select name="type" onChange={handleFilters}>
-            <Option disabled selected>
-              Typ
-            </Option>
-            <Option>Proszek</Option>
-            <Option>Kapsułki</Option>
-            <Option>Napoje</Option>
-          </Select>
-        </Filter>
-        <Filter>
           <FilterText>Sortuj produkty:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
             <Option value="newest">Najnowsze</Option>
