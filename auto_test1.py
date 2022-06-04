@@ -33,36 +33,35 @@ class AppSearch(unittest.TestCase):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
         driver.get("http://localhost:3000/login")
 
-        search_login = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[1]""")
-        search_pw = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[2]""")
+        search_login = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/form/input[1]""")
+        search_pw = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/form/input[2]""")
 
         search_login.send_keys('admin')
         search_pw.send_keys('123456')
 
-        search_button = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/button""")
+        search_button = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/form/button""")
         search_button.click()
-        #time.sleep(3)
+
+        #time.sleep(1)
+
+
         driver.close()
 
     def test_rejestracja(self):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
         driver.get("http://localhost:3000/register")
 
-        search_imie = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[1]""")
-        search_nazwisko = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[2]""")
-        search_email = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[3]""")
-        search_login = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[4]""")
-        search_haslo = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[5]""")
-        search_pothaslo = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/input[6]""")
+        search_email = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/div/form/input[1]""")
+        search_login = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/div/form/input[2]""")
+        search_haslo = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/div/form/input[3]""")
+        search_pothaslo = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/div/form/input[4]""")
 
-        search_imie.send_keys('Kacper')
-        search_nazwisko.send_keys('Piaskowski')
         search_email.send_keys('kacper.piaskowski@wp.pl')
         search_login.send_keys('supikacpi')
         search_haslo.send_keys('haslo123')
         search_pothaslo.send_keys('haslo123')
 
-        search_button = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div/form/button""")
+        search_button = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[2]/div/form/button""")
         search_button.click()
         # time.sleep(3)
         driver.close()
@@ -72,7 +71,7 @@ class AppSearch(unittest.TestCase):
         driver = webdriver.Chrome(executable_path=r"D:\chromedriver\chromedriver_win32\chromedriver.exe")
         driver.get("http://localhost:3000/product/6294e6720296fcda6322d652")
 
-        search_add = driver.find_element(by=By.XPATH, value="""// *[ @ id = "root"] / div / div[3] / div[2] / div / button""")
+        search_add = driver.find_element(by=By.XPATH, value="""//*[@id="root"]/div/div[3]/div[2]/div/button""")
         search_add.click()
 
         driver.get("http://localhost:3000/cart")
