@@ -7,6 +7,7 @@ trigger:
 - full
 
 pool:
+  pool: MyPool
   vmImage: MyPool
 
 steps:
