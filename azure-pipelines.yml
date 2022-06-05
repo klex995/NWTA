@@ -7,7 +7,7 @@ trigger:
 - full
 
 pool:
-  pool: 'default'
+  pool: 'MyPool'
 
 steps:
 - task: NodeTool@0
