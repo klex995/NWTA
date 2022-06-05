@@ -7,8 +7,7 @@ trigger:
 - full
 
 pool:
-  pool: 'MyPool'
-  agent: 'agent1'
+  pool: MyPool
 
 steps:
 - task: NodeTool@0
